@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.mindgate.main.BookingDetails;
+import com.mindgate.main.domain.BookingDetails;
 
 
 

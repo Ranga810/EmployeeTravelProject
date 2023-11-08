@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.mindgate.main.BookingDetails;
+import com.mindgate.main.domain.BookingDetails;
 
 @Repository
 public class BookingRepository implements BookingRepositoryInterface {
@@ -16,7 +16,7 @@ public class BookingRepository implements BookingRepositoryInterface {
 	    
 	    private final  static String INSERT_NEW_BOOKING="insert into booking_details values(booking_id.nextVal,?,?,?,?,?,?,?,?,?,?)";
 	    
-	    private final static String UPDATE_EXISTING_BOOKING="update booking_details set travel_request_id=?, onboarding_date=? ,onboarding_place=? ,destination=? ,destination_date=?, hotel_name=?, hotel_address=? ,check_in_time=? ,check_out_time=?, contact_number=? where booking_id=?";
+	    private final static String UPDATE_EXISTING_BOOKING="update booking_details set travel_request_id=?,onboarding_date=?,onboarding_place=?,destination=? ,destination_date=?, hotel_name=?, hotel_address=? ,check_in_time=? ,check_out_time=?, contact_number=? where booking_id=?";
 	    
 	    
 	    
@@ -49,7 +49,17 @@ public class BookingRepository implements BookingRepositoryInterface {
 
 	@Override
 	public boolean addnewbooking(BookingDetails bookingDetails) {
-		 Object[] parameters = { bookingDetails.getRequestTravelId(),bookingDetails.getOnboardingDate(),bookingDetails.getOnboardingPlace(),bookingDetails.getDestination(),bookingDetails.getDestinationDate(),bookingDetails.getHotelName(),bookingDetails.getHotelAddress(),bookingDetails.getCheckInTime(),bookingDetails.getCheckOutTime(),bookingDetails.getContactNumber() };
+		 Object[] parameters = {bookingDetails.getRequestTravelId()
+				 ,bookingDetails.getOnboardingDate(),
+				 bookingDetails.getOnboardingPlace(),
+				 bookingDetails.getDestination(),
+				 bookingDetails.getDestinationDate(),
+				 bookingDetails.getHotelName(),
+				 bookingDetails.getHotelAddress(),
+				 bookingDetails.getCheckInTime(),
+				 bookingDetails.getCheckOutTime(),
+				 bookingDetails.getContactNumber(),
+				  };
 	        
 
 	        jdbcTemplate.update(INSERT_NEW_BOOKING, parameters);
@@ -59,8 +69,18 @@ public class BookingRepository implements BookingRepositoryInterface {
 
 	@Override
 	public BookingDetails updatebooking(BookingDetails bookingDetails) {
-		 Object [] parameters = {bookingDetails.getBookingId(),bookingDetails.getRequestTravelId(), bookingDetails.getDestination(), bookingDetails.getDestinationDate(), bookingDetails.getHotelAddress(), bookingDetails.getHotelName(), bookingDetails.getCheckInTime(), bookingDetails.getCheckOutTime(), bookingDetails.getContactNumber(), bookingDetails.getOnboardingDate(), bookingDetails.getOnboardingPlace() };
-	        
+		 Object [] parameters = {bookingDetails.getRequestTravelId(), 
+				 bookingDetails.getOnboardingDate(),
+				 bookingDetails.getOnboardingPlace(),
+				 bookingDetails.getDestination(),
+				 bookingDetails.getDestinationDate(),
+				 bookingDetails.getHotelName(),
+				 bookingDetails.getHotelAddress(),
+				 bookingDetails.getCheckInTime(), 
+				 bookingDetails.getCheckOutTime(),
+				 bookingDetails.getContactNumber(),
+				 bookingDetails.getBookingId() };
+//		 travel_request_id=?,onboarding_date=?,onboarding_place=?,destination=? ,destination_date=?, hotel_name=?, hotel_address=? ,check_in_time=? ,check_out_time=?, contact_number=? where booking_id=?"
 	        int rowcount = jdbcTemplate.update(UPDATE_EXISTING_BOOKING, parameters);
 	        if(rowcount >0){
 	            return getbookingBybookingId(bookingDetails.getBookingId());

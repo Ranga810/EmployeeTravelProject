@@ -2,38 +2,46 @@ package com.mindgate.main.service;
 
 import java.util.List;
 
-import com.mindgate.main.BookingDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.mindgate.main.domain.BookingDetails;
+import com.mindgate.main.repository.BookingRepositoryInterface;
+
+@Service
 public class BookingService implements BookingServiceInterface {
+	
+	@Autowired
+	private BookingRepositoryInterface  bookingRepositoryInterface;
 
 	@Override
 	public boolean deletebooking(int bookingId) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return bookingRepositoryInterface.deletebooking(bookingId);
 	}
 
 	@Override
 	public BookingDetails getbookingBybookingId(int bookingId) {
 		// TODO Auto-generated method stub
-		return null;
+		return bookingRepositoryInterface.getbookingBybookingId(bookingId);
 	}
 
 	@Override
 	public List<BookingDetails> getallbookings() {
 		// TODO Auto-generated method stub
-		return null;
+		return bookingRepositoryInterface.getallbookings();
 	}
 
 	@Override
 	public boolean addnewbooking(BookingDetails bookingDetails) {
 		// TODO Auto-generated method stub
-		return false;
+		return bookingRepositoryInterface.addnewbooking(bookingDetails);
 	}
 
 	@Override
 	public BookingDetails updatebooking(BookingDetails bookingDetails) {
 		// TODO Auto-generated method stub
-		return null;
+		return bookingRepositoryInterface.updatebooking(bookingDetails);
 	}
 
 }

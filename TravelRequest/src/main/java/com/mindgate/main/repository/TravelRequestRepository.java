@@ -43,7 +43,12 @@ public class TravelRequestRepository implements TravelRequestRepositoryInterface
 	}
 	@Override
 	public TravelRequest updaterequest(TravelRequest travelRequest) {
-Object [] parameters = { travelRequest.getEmployeeId(),travelRequest.getTravelMedium(),travelRequest.getTravelStartDate(),travelRequest.getTravelEndDate(),travelRequest.getTravelpurpose(),travelRequest.getPMAuthorisation(),travelRequest.getTMAuthorisation(),travelRequest.getDirectorAuthorisation(),travelRequest.getDocumentId(),travelRequest.getRequestId() };
+Object [] parameters = { travelRequest.getEmployeeId(),
+		travelRequest.getTravelMedium(),
+		travelRequest.getTravelStartDate(),
+		travelRequest.getTravelEndDate(),
+		travelRequest.getTravelpurpose(),
+		travelRequest.getPMAuthorisation(),travelRequest.getTMAuthorisation(),travelRequest.getDirectorAuthorisation(),travelRequest.getDocumentId(),travelRequest.getRequestId() };
 		
     	int rowcount = jdbcTemplate.update(UPDATE_EXISTING_REQUEST, parameters);
     	if(rowcount >0){
